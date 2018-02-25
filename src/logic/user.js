@@ -68,7 +68,7 @@ module.exports = class extends Base {
     this.allowMethods = 'get';
 
     if (!this.validate(rules)) {
-      return this.showMsg('/');
+      return this.showMsg(this.config('pkg.prefix'));
     }
   }
 
@@ -91,7 +91,7 @@ module.exports = class extends Base {
     this.allowMethods = 'get';
 
     if (!this.validate(rules)) {
-      return this.showMsg('/');
+      return this.showMsg(this.config('pkg.prefix'));
     }
   }
 

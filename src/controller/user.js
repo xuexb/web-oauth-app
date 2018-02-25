@@ -1,8 +1,3 @@
-/**
- * @file MIP 登录项目 - 用户相关
- * @author xuexb <fe.xiaowu@gmail.com>
- */
-
 const Base = require('./base.js');
 
 module.exports = class extends Base {
@@ -13,7 +8,7 @@ module.exports = class extends Base {
     await super.__before();
 
     if (['login', 'reg', 'exit', 'oauthLogin', 'oauthCallback'].indexOf(this.ctx.action) == -1 && !this.isLogin) {
-      return this.showMsg('请先登录', '/user/login');
+      return this.showMsg('请先登录', `${this.config('pkg.prefix')}/user/login`);
     }
 
     if (['login', 'reg'].indexOf(this.ctx.action) > -1 && this.cookie('oauth')) {
@@ -40,9 +35,9 @@ module.exports = class extends Base {
       // 如果当前是登录状态，则判断第三方有没有绑定过其他帐户
       if (this.userinfo) {
         if (!think.isEmpty(oauth) && this.userinfo.id === oauth.user_id) {
-          return this.showMsg('已经绑定通过', '/user/oauth');
+          return this.showMsg('已经绑定通过', `${this.config('pkg.prefix')}/user/oauth`);
         } else if (!think.isEmpty(oauth)) {
-          return this.showMsg(`该${type}已经绑定其他帐号`, '/user/oauth');
+          return this.showMsg(`该${type}已经绑定其他帐号`, `${this.config('pkg.prefix')}/user/oauth`);
         } else {
           await this.model('oauth').add({
             type: type,
@@ -51,7 +46,7 @@ module.exports = class extends Base {
             user_id: this.userinfo.id,
             create_time: Date.now()
           });
-          return this.showMsg(`绑定成功`, '/user/oauth');
+          return this.showMsg(`绑定成功`, `${this.config('pkg.prefix')}/user/oauth`);
         }
       }
 
@@ -62,7 +57,7 @@ module.exports = class extends Base {
           // 写入 session
           delete user.password;
           await this.session('userinfo', user);
-          return this.redirect('/user');
+          return this.redirect(`${this.config('pkg.prefix')}/user`);
         } else {
           // 用户都不存在了，授权数据可以删了。这可能就是传说中的人一走，茶就凉吧。。。
           await this.model('oauth').where({uid: userinfo.uid, type}).delete();
@@ -71,10 +66,10 @@ module.exports = class extends Base {
 
       // 记录当前第三方信息，用来登录、注册后绑定
       this.cookie('oauth', encodeURIComponent(JSON.stringify(userinfo)));
-      return this.redirect('/user/login');
+      return this.redirect(`${this.config('pkg.prefix')}/user/login`);
     } catch (e) {
       think.logger.error(new Error(e));
-      return this.showMsg(`${type} 登录失败`, '/user/login');
+      return this.showMsg(`${type} 登录失败`, `${this.config('pkg.prefix')}/user/login`);
     }
   }
 
@@ -143,7 +138,7 @@ module.exports = class extends Base {
     // 写入 session
     await this.writeUserinfo(user.id);
 
-    return this.redirect('/user');
+    return this.redirect(`${this.config('pkg.prefix')}/user`);
   }
 
   /**
@@ -191,7 +186,7 @@ module.exports = class extends Base {
   async exitAction() {
     await this.session('userinfo', null);
     this.cookie('oauth', null);
-    return this.redirect(this.get('ref') || '/');
+    return this.redirect(this.get('ref') || this.config('pkg.prefix'));
   }
 
   /**
@@ -271,6 +266,6 @@ module.exports = class extends Base {
       type
     }).delete();
 
-    return this.showMsg(`删除${type}授权成功`, '/user/oauth');
+    return this.showMsg(`删除${type}授权成功`, `${this.config('pkg.prefix')}/user/oauth`);
   }
 };

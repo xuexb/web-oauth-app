@@ -6,7 +6,7 @@
   <form method="post">
     {% if oauth %}
       <div class="alert alert-primary" role="alert">
-      登录成功即可关联您的 {{ oauth.type }}@{{ oauth.uid }} 帐号，或者 <a href="/user/exit?ref=/user/reg">清空</a> 授权信息。
+      登录成功即可关联您的 {{ oauth.type }}@{{ oauth.uid }} 帐号，或者 <a href="{{ config.pkg.prefix }}/user/exit?ref={{ config.pkg.prefix }}/user/reg">清空</a> 授权信息。
       </div>
     {% endif %}
     <div class="form-group">
@@ -19,10 +19,10 @@
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary">登录</button>
-      <a href="/user/reg" class="ml-2">没有帐号？立即注册</a>
+      <a href="{{ config.pkg.prefix }}/user/reg" class="ml-2">没有帐号？立即注册</a>
     </div>
     <div class="mt-5">
-      第三方登录：<a href="/user/login/github">GitHub</a>
+      第三方登录：<a href="{{ config.pkg.prefix }}/user/login/github">GitHub</a>
     </div>
   </form>
 {% endblock %}

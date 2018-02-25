@@ -26,14 +26,14 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                      <button class="btn btn-danger" onclick="location.href = '/user/oauthDelete?type={{ item.type }}'">继续</button>
+                      <button class="btn btn-danger" onclick="location.href = '{{ config.pkg.prefix }}/user/oauthDelete?type={{ item.type }}'">继续</button>
                     </div>
                   </div>
                 </div>
               </div>
               <button type="button" data-toggle="modal" data-target="#deleteModal{{ loop.index }}" class="btn btn-sm btn-danger">删除</button>
             {% else %}
-              <a href="/user/login/{{ item.type }}">绑定</a>
+              <a href="{{ config.pkg.prefix }}/user/login/{{ item.type }}">绑定</a>
             {% endif %}
           </td>
         </tr>

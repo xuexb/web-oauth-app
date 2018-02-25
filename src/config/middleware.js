@@ -1,4 +1,5 @@
 const path = require('path');
+const pkg = require('../../package.json');
 const isDev = think.env === 'development';
 
 module.exports = [
@@ -30,7 +31,9 @@ module.exports = [
   },
   {
     handle: 'router',
-    options: {}
+    options: {
+      prefix: [pkg.prefix]
+    }
   },
   'logic',
   'controller'

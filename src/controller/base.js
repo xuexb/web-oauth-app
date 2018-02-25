@@ -28,7 +28,6 @@ module.exports = class extends think.Controller {
    */
   async __before() {
     const userinfo = await this.session('userinfo');
-    console.log(userinfo);
     this.userinfo = userinfo;
     this.isLogin = !!userinfo;
     this.assign({userinfo});

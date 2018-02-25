@@ -3,6 +3,7 @@
   "description": "第三方登录WEB网站示例",
   "version": "1.0.0",
   "author": "xuexb <fe.xiaowu@gmail.com>",
+  "prefix": "/web-oauth-app",
   "scripts": {
     "start": "node development.js",
     "lint": "eslint src/",
@@ -35,7 +36,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=7.9=8.0"
+    "node": ">=7.8.0"
   },
   "main": "development.js",
   "keywords": [
