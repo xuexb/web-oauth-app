@@ -15,10 +15,6 @@ module.exports = class extends think.Service {
   }
 
   async getToken() {
-    if (this.access_token) {
-      return this.access_token;
-    }
-
     return await this.fetch(`https://github.com/login/oauth/access_token?client_id=${this.config.client_id}&client_secret=${this.config.client_secret}&code=${this.ctx.query.code}`, {
       headers: {
         'Cache-Control': 'no-cache',

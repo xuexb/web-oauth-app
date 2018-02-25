@@ -5,6 +5,8 @@ module.exports = Object.assign({}, {pkg}, {
   port: 8020,
   oauth: {
     github: {
+    },
+    qq: {
     }
   }
 });

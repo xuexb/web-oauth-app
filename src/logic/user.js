@@ -61,7 +61,7 @@ module.exports = class extends Base {
     const rules = {
       type: {
         required: true,
-        in: ['github']
+        in: ['github', 'qq']
       }
     };
 
@@ -80,10 +80,10 @@ module.exports = class extends Base {
     const rules = {
       type: {
         required: true,
-        in: ['github']
+        in: ['github', 'qq']
       },
       code: {
-        requiredIf: ['type', 'github'],
+        requiredIf: ['type', 'github', 'qq'],
         method: 'GET'
       }
     };
