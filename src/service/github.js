@@ -42,10 +42,11 @@ module.exports = class extends think.Service {
     });
     const userinfo = await github.users.get({});
     return {
-      uid: userinfo.data.login,
+      uid: userinfo.data.id,
+      name: userinfo.data.name || 'github用户',
       info: {
-        name: userinfo.data.name,
-        email: userinfo.data.email
+        email: userinfo.data.email,
+        avatar: userinfo.data.avatar_url
       },
       token,
       type: 'github'

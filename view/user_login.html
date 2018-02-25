@@ -6,7 +6,7 @@
   <form method="post">
     {% if oauth %}
       <div class="alert alert-primary" role="alert">
-      登录成功即可关联您的 {{ oauth.type }}@{{ oauth.uid }} 帐号，或者 <a href="{{ config.pkg.prefix }}/user/exit?ref={{ config.pkg.prefix }}/user/reg">清空</a> 授权信息。
+        登录成功即可关联您的 {{ oauth.type }} 的 {{ oauth.name }} 帐号，或者 <a href="{{ config.pkg.prefix }}/user/exit?ref={{ config.pkg.prefix }}/user/reg">清空</a> 授权信息。
       </div>
     {% endif %}
     <div class="form-group">

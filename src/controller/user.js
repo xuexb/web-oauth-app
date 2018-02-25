@@ -41,6 +41,7 @@ module.exports = class extends Base {
         } else {
           await this.model('oauth').add({
             type: type,
+            name: userinfo.name,
             uid: userinfo.uid,
             info: JSON.stringify(userinfo.info),
             user_id: this.userinfo.id,
@@ -120,6 +121,7 @@ module.exports = class extends Base {
 
       await this.model('oauth').add({
         type: this.oauth.type,
+        name: this.oauth.name,
         uid: this.oauth.uid,
         info: JSON.stringify(this.oauth.info),
         user_id: user.id,
@@ -163,6 +165,7 @@ module.exports = class extends Base {
     if (this.oauth) {
       await this.model('oauth').add({
         type: this.oauth.type,
+        name: this.oauth.name,
         uid: this.oauth.uid,
         info: JSON.stringify(this.oauth.info),
         user_id: user.id,

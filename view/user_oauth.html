@@ -7,6 +7,7 @@
     <thead>
       <tr>
         <th scope="col">类型</th>
+        <th scope="col">名称</th>
         <th scope="col">标识</th>
         <th scope="col">操作</th>
       </tr>
@@ -15,6 +16,7 @@
       {% for item in items %}
         <tr>
           <td>{{ item.type }}</td>
+          <td>{{ item.name | default('-') }}</td>
           <td>{{ item.uid | default('-') }}</td>
           <td>
             {% if item.uid %}

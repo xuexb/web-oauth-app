@@ -47,8 +47,9 @@ module.exports = class extends think.Service {
     const userinfo = await this.fetch(`https://graph.qq.com/user/get_user_info?access_token=${data.token}&oauth_consumer_key=${this.config.appid}&openid=${data.openid}`).then(res => res.json());
     return {
       uid: data.openid,
+      name: userinfo.nickname || 'qq用户',
       info: {
-        name: userinfo.nickname
+        avatar: userinfo.figureurl_qq_2
       },
       type: 'qq'
     };
