@@ -7,6 +7,8 @@ module.exports = Object.assign({}, {pkg}, {
     github: {
     },
     qq: {
+    },
+    weibo: {
     }
   }
 });
