@@ -6,7 +6,7 @@
 
 ## 使用技术
 
-- 后端基于 [NodeJS](http://nodejs.org/) + [ThinkJS](http://thinkjs.org/)
+- 后端基于 [NodeJS v7.8+](http://nodejs.org/) + [ThinkJS v3](http://thinkjs.org/)
 - 数据库基于 MySQL
 - 前端样式基于 [Bootstrap v4](https://v4.bootcss.com/)
 - 代码托管于 [GitHub@xuexb/web-oauth-app](https://github.com/xuexb/web-oauth-app)
