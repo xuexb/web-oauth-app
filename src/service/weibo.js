@@ -9,7 +9,6 @@ module.exports = class extends think.Service {
   }
 
   login() {
-    const display = /Android|webOS|iPhone|iPad|iPod|ucweb|BlackBerry|IEMobile|Opera Mini/i.test(this.ctx.request.header['user-agent']) ? 'mobile' : 'pc';
     this.ctx.status = 302;
     this.ctx.redirect(`https://api.weibo.com/oauth2/authorize?client_id=${this.config.appkey}&redirect_uri=${encodeURIComponent(this.config.callback)}`);
   }

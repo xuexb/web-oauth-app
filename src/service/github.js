@@ -34,7 +34,7 @@ module.exports = class extends think.Service {
   async getUserInfo() {
     const token = await this.getToken();
     if (!token) {
-      return null;
+      return {};
     }
     github.authenticate({
       type: 'token',
