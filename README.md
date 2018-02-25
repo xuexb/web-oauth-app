@@ -93,6 +93,8 @@ SET FOREIGN_KEY_CHECKS = 1;
     - `screen_name` - 显示名称
     - `avatar_hd` - 用户头像
 
+参考链接：[http://open.weibo.com/wiki/授权机制说明](http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
+
 ## 隐私声明
 
 - 本项目只是演示示例，登录、注册的密码通过 MD5 加密后存储于 MySQL 中。
