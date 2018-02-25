@@ -37,3 +37,5 @@ config.development.js
 adapter.development.js
 config.production.js
 adapter.production.js
+
+package-lock.json
