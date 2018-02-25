@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}首页 - {{ config.pkg.name }}{% endblock %}
+
+{% block content %}
+  <h3>{{ config.pkg.description }}</h3>
+  <p class="mt-4">
+    这是一个用来实验WEB网站集成第三方登录的项目，一个帐号可以关联多个第三方网站，如：Github、微信、微博、QQ、百度等，为了更好的熟悉整个流程，该项目应运而生。
+  </p>
+  <p>
+    <a href="https://github.com/xuexb/web-oauth-app">查看更多介绍>></a>
+  </p>
+{% endblock %}

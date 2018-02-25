@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}注册 - {{ config.pkg.name }}{% endblock %}
+
+{% block content %}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">类型</th>
+        <th scope="col">标识</th>
+        <th scope="col">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+        <tr>
+          <td>{{ item.type }}</td>
+          <td>{{ item.uid | default('-') }}</td>
+          <td>
+            {% if item.uid %}
+              <div class="modal fade" id="deleteModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="删除提示" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <p>删除后将不能通过<strong>{{ item.type }}</strong>进行登录。</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                      <button class="btn btn-danger" onclick="location.href = '/user/oauthDelete?type={{ item.type }}'">继续</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" data-toggle="modal" data-target="#deleteModal{{ loop.index }}" class="btn btn-sm btn-danger">删除</button>
+            {% else %}
+              <a href="/user/login/{{ item.type }}">绑定</a>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+      <tr>
+        <td colspan="3" class="text-center">没有绑定第三方授权登录</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

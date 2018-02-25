@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}hello world!{% endblock %}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
+<body>
+  {% block header %}{% include 'inc/header.html' %}{% endblock %}
+
+  {% block showErrorMsg %}{% include 'inc/showMsg.html' %}{% endblock %}
+
+  <div class="container-fluid mt-3">
+      {% block content %}{% endblock %}
+  </div>
+
+  {% block footer %}{% include 'inc/footer.html' %}{% endblock %}
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

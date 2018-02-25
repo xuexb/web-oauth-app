@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}用户中心 - {{ config.pkg.name }}{% endblock %}
+
+{% block content %}
+  <ul>
+    <li>用户名：{{ userinfo.username }}</li>
+    <li>用户ID：{{ userinfo.id }}</li>
+    <li>注册时间：{{ userinfo.create_time | format }}</li>
+    <li>最后登录时间：{{ userinfo.update_time | format }}</li>
+    <li><a href="#" data-toggle="modal" data-target="#destroyModal">销毁帐户和数据</a></li>
+  </ul>
+
+  <div class="modal fade" id="destroyModal" tabindex="-1" role="dialog" aria-labelledby="销毁提示" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>销毁后将不可恢复，销毁的数据包括：</p>
+          <ul>
+            <li>帐户信息</li>
+            <li>第三方登录信息</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button class="btn btn-danger" onclick="location.href = '/user/destroy'">继续</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

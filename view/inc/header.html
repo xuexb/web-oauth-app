@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">
+    <img src="https://static.cdn.xuexb.com/image/logo.jpg?imageslim" width="30" height="30" class="d-inline-block align-top" alt="LOGO">
+    授权示例
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">首页</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://github.com/xuexb/web-oauth-app">GitHub</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">帐户</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          {% if userinfo %}
+            <a class="dropdown-item" href="/user">个人中心</a>
+            <a class="dropdown-item" href="/user/oauth">第三方登录</a>
+            <a class="dropdown-item" href="/user/changepassword">修改密码</a>
+            <a class="dropdown-item" href="/user/exit">退出登录</a>
+          {% else %}
+            <a class="dropdown-item" href="/user/login">登录</a>
+            <a class="dropdown-item" href="/user/reg">注册</a>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
