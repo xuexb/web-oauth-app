@@ -35,7 +35,7 @@
               </div>
               <button type="button" data-toggle="modal" data-target="#deleteModal{{ loop.index }}" class="btn btn-sm btn-danger">删除</button>
             {% else %}
-              <a href="{{ config.pkg.prefix }}/user/login/{{ item.type }}">绑定</a>
+              <button type="button" class="btn btn-primary btn-sm" onclick="location.href = '{{ config.pkg.prefix }}/user/login/{{ item.type }}'">绑定</button>
             {% endif %}
           </td>
         </tr>
