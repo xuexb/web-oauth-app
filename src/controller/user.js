@@ -25,11 +25,11 @@ module.exports = class extends Base {
    */
   async oauthCallbackAction() {
     const type = this.get('type');
-    const github = think.service(type, this.ctx, this.config(`oauth.${type}`));
+    const service = think.service(type, this.ctx, this.config(`oauth.${type}`));
 
     try {
       // 获取第三方标识
-      const userinfo = await github.getUserInfo();
+      const userinfo = await service.getUserInfo();
       const oauth = await this.model('oauth').where({uid: userinfo.uid, type}).find();
 
       // 如果当前是登录状态，则判断第三方有没有绑定过其他帐户
@@ -58,7 +58,7 @@ module.exports = class extends Base {
           // 写入 session
           delete user.password;
           await this.session('userinfo', user);
-          return this.redirect(`${this.config('pkg.prefix')}/user`);
+          return this.showMsg(`登录成功，欢迎通过${type}登录！`, `${this.config('pkg.prefix')}/user`);
         } else {
           // 用户都不存在了，授权数据可以删了。这可能就是传说中的人一走，茶就凉吧。。。
           await this.model('oauth').where({uid: userinfo.uid, type}).delete();
@@ -69,7 +69,7 @@ module.exports = class extends Base {
       this.cookie('oauth', encodeURIComponent(JSON.stringify(userinfo)));
       return this.redirect(`${this.config('pkg.prefix')}/user/login`);
     } catch (e) {
-      think.logger.error(new Error(e));
+      console.error(e)
       return this.showMsg(`${type} 登录失败`, `${this.config('pkg.prefix')}/user/login`);
     }
   }
@@ -128,6 +128,18 @@ module.exports = class extends Base {
         create_time: Date.now()
       });
       this.cookie('oauth', null);
+
+      // 更新登录时间
+      await this.model('user').where({
+        id: user.id
+      }).update({
+        update_time: Date.now()
+      });
+
+      // 写入 session
+      await this.writeUserinfo(user.id);
+
+      return this.showMsg('绑定登录成功', `${this.config('pkg.prefix')}/user`);
     }
 
     // 更新登录时间
@@ -140,7 +152,7 @@ module.exports = class extends Base {
     // 写入 session
     await this.writeUserinfo(user.id);
 
-    return this.redirect(`${this.config('pkg.prefix')}/user`);
+    return this.showMsg('登录成功', `${this.config('pkg.prefix')}/user`);
   }
 
   /**
@@ -161,6 +173,9 @@ module.exports = class extends Base {
       update_time: Date.now()
     });
 
+    // 写入 session
+    await this.writeUserinfo(user.id);
+
     // 如果有第三方登录信息则关联
     if (this.oauth) {
       await this.model('oauth').add({
@@ -174,10 +189,7 @@ module.exports = class extends Base {
       this.cookie('oauth', null);
     }
 
-    // 写入 session
-    await this.writeUserinfo(user.id);
-
-    return this.redirect('/user');
+    return this.showMsg(this.oauth ? '绑定注册成功' : '注册成功',`${this.config('pkg.prefix')}/user`);
   }
 
   /**
