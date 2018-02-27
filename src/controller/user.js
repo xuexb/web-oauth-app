@@ -70,7 +70,7 @@ module.exports = class extends Base {
       return this.redirect(`${this.config('pkg.prefix')}/user/login`);
     } catch (e) {
       console.error(e)
-      return this.showMsg(`${type} 登录失败`, `${this.config('pkg.prefix')}/user/login`);
+      return this.showMsg(`${type} 登录失败`, this.userinfo ? `${this.config('pkg.prefix')}/user/oauth` : `${this.config('pkg.prefix')}/user/login`);
     }
   }
 
