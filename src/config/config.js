@@ -9,6 +9,8 @@ module.exports = Object.assign({}, {pkg}, {
     qq: {
     },
     weibo: {
+    },
+    baidu: {
     }
   }
 });
