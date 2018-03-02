@@ -75,7 +75,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 ### QQ
 
-1. 跳转到授权页 `https://graph.qq.com/oauth2.0/show?which=Login&display=` ，有个小坑是，WEB端和移动端传的 `display` 参数不一样，需要单独处理下
+1. 跳转到授权页 `https://graph.qq.com/oauth2.0/show?which=Login&display=` ，需要区分下 PC 端和移动端传，参数 `display` 不一样，需要单独处理下
 1. 认证通过后自动跳转到参数 `redirect_uri` 中，并携带 `code`
 2. 使用 `code` 请求 `https://graph.qq.com/oauth2.0/token?` 获取 `access_token` ，有个大坑是成功时返回 `access_token=xxx` ，错误时返回 `callback( {code: xxx} )` ，好尴尬。。。
 3. 使用 `access_token` 请求 `https://graph.qq.com/oauth2.0/me?` 获取 `openid` ，而这里又是返回个 `callback({"openid": "1"})`
@@ -97,6 +97,18 @@ SET FOREIGN_KEY_CHECKS = 1;
     - `avatar_hd` - 用户头像
 
 参考链接：[http://open.weibo.com/wiki/授权机制说明](http://open.weibo.com/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E)
+
+### 百度
+
+1. 跳转到授权页面 `http://openapi.baidu.com/oauth/2.0/authorize?` ，需要区分下 PC 端和移动端传，参数 `display` 不一样，需要单独处理下
+2. 认证通过后自动跳转到参数 `redirect_uri` 中，并携带 `code`
+1. 使用 `code` 请求 `https://openapi.baidu.com/oauth/2.0/token` 获取 `access_token`
+2. 使用 `access_token` 请求 `https://openapi.baidu.com/rest/2.0/passport/users/getInfo` 来获取用户信息，最终为：
+    1. `userid` - 唯一标识
+    2. `username` - 显示名称
+    3. `http://tb.himg.baidu.com/sys/portrait/item/${userinfo.portrait}` - 用户头像
+
+参考链接：<http://developer.baidu.com/wiki/index.php?title=docs/oauth/application>
 
 ## 隐私声明
 
