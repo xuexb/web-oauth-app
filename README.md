@@ -104,9 +104,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 2. 认证通过后自动跳转到参数 `redirect_uri` 中，并携带 `code`
 1. 使用 `code` 请求 `https://openapi.baidu.com/oauth/2.0/token` 获取 `access_token`
 2. 使用 `access_token` 请求 `https://openapi.baidu.com/rest/2.0/passport/users/getInfo` 来获取用户信息，最终为：
-    1. `userid` - 唯一标识
-    2. `username` - 显示名称
-    3. `http://tb.himg.baidu.com/sys/portrait/item/${userinfo.portrait}` - 用户头像
+    - `userid` - 唯一标识
+    - `username` - 显示名称
+    - `http://tb.himg.baidu.com/sys/portrait/item/${userinfo.portrait}` - 用户头像
 
 参考链接：<http://developer.baidu.com/wiki/index.php?title=docs/oauth/application>
 
