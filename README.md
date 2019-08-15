@@ -124,11 +124,17 @@ SET FOREIGN_KEY_CHECKS = 1;
 # 导入 MySQL 数据
 ...
 
+# 申请第三方开发平台
+...
+
 # 克隆代码
 git clone https://github.com/xuexb/web-oauth-app.git && cd web-oauth-app
 
 # 修改数据库配置
 vi src/config/adapter.js
+
+# 修改配置信息
+vi src/config/config.js
 
 # 安装依赖
 yarn install

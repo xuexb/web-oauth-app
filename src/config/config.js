@@ -5,12 +5,23 @@ module.exports = Object.assign({}, {pkg}, {
   port: 8020,
   oauth: {
     github: {
+      client_id: '',
+      client_secret: ''
     },
     qq: {
+      appid: 0,
+      appkey: '',
+      callback: ''
     },
     weibo: {
+      appkey: 0,
+      appsecret: '',
+      callback: ''
     },
     baidu: {
+      appkey: '',
+      secretkey: '',
+      callback: ''
     }
   }
 });
