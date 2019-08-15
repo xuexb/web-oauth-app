@@ -2,6 +2,7 @@ const fileCache = require('think-cache-file');
 const nunjucks = require('think-view-nunjucks');
 const fileSession = require('think-session-file');
 const {Console, File, DateFile} = require('think-logger3');
+const mysql = require('think-model-mysql');
 const path = require('path');
 const isDev = think.env === 'development';
 
@@ -110,5 +111,26 @@ exports.logger = {
     pattern: '-yyyy-MM-dd',
     alwaysIncludePattern: true,
     filename: path.join(think.ROOT_PATH, 'logs/app.log')
+  }
+};
+
+// 数据库配置
+exports.model = {
+  type: 'mysql', // 默认使用的类型，调用时可以指定参数切换
+  common: { // 通用配置
+    logConnect: true, // 是否打印数据库连接信息
+    logSql: true, // 是否打印 SQL 语句
+    logger: msg => think.logger.info(msg) // 打印信息的 logger
+  },
+  mysql: {
+    handle: mysql, // Adapter handle
+    user: 'root', // 用户名
+    password: '', // 密码
+    database: '', // 数据库
+    host: '127.0.0.1', // host
+    port: 3306, // 端口
+    connectionLimit: 1, // 连接池的连接个数，默认为 1
+    prefix: '', // 数据表前缀，如果一个数据库里有多个项目，那项目之间的数据表可以通过前缀来区分
+    acquireWaitTimeout: 0 // 等待连接的超时时间，避免获取不到连接一直卡在那里，开发环境下有用
   }
 };
