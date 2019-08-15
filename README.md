@@ -6,13 +6,15 @@
 
 ## 使用技术
 
-- 后端基于 [NodeJS v7.8+](http://nodejs.org/) + [ThinkJS v3](http://thinkjs.org/)
+- 后端基于 [Node.js v7.8+](http://nodejs.org/) + [ThinkJS v3](http://thinkjs.org/)
 - 数据库基于 MySQL
 - 前端样式基于 [Bootstrap v4](https://v4.bootcss.com/)
 - 代码托管于 [GitHub@xuexb/web-oauth-app](https://github.com/xuexb/web-oauth-app)
 - 示例链接 <https://xuexb.com/web-oauth-app>
 
 ## 数据库
+
+> 请注意修改 `src/config/adapter.js` 中的配置。
 
 ```
 SET NAMES utf8mb4;
@@ -115,6 +117,25 @@ SET FOREIGN_KEY_CHECKS = 1;
 - 本项目只是演示示例，登录、注册的密码通过 MD5 加密后存储于 MySQL 中。
 - 第三方登录相关信息不会对外暴露。
 - 所有数据不定期的进行删除。
+
+## 本地开发
+
+```bash
+# 导入 MySQL 数据
+...
+
+# 克隆代码
+git clone https://github.com/xuexb/web-oauth-app.git && cd web-oauth-app
+
+# 修改数据库配置
+vi src/config/adapter.js
+
+# 安装依赖
+yarn install
+
+# 本地开发
+yarn start
+```
 
 ## License
 MIT
