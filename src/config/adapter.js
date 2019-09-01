@@ -1,7 +1,7 @@
 const fileCache = require('think-cache-file');
 const nunjucks = require('think-view-nunjucks');
 const fileSession = require('think-session-file');
-const {Console, File, DateFile} = require('think-logger3');
+const {Console, DateFile} = require('think-logger3');
 const mysql = require('think-model-mysql');
 const path = require('path');
 const isDev = think.env === 'development';
@@ -97,20 +97,15 @@ exports.logger = {
   console: {
     handle: Console
   },
-  file: {
-    handle: File,
-    backups: 10, // max chunk number
-    absolute: true,
-    maxLogSize: 50 * 1024, // 50M
-    filename: path.join(think.ROOT_PATH, 'logs/app.log')
-  },
   dateFile: {
     handle: DateFile,
     level: 'ALL',
     absolute: true,
-    pattern: '-yyyy-MM-dd',
-    alwaysIncludePattern: true,
-    filename: path.join(think.ROOT_PATH, 'logs/app.log')
+
+    // 如果是 Docker 运行，则配合 Dockerfile 输出日志
+    pattern: process.env.DOCKER ? '' : '-yyyy-MM-dd',
+    alwaysIncludePattern: process.env.DOCKER ? false : true,
+    filename: process.env.DOCKER ? '/var/log/node.log' : path.join(think.ROOT_PATH, 'logs/app.log')
   }
 };
 
@@ -124,13 +119,13 @@ exports.model = {
   },
   mysql: {
     handle: mysql, // Adapter handle
-    user: 'root', // 用户名
-    password: '', // 密码
-    database: '', // 数据库
-    host: '127.0.0.1', // host
-    port: 3306, // 端口
+    user: process.env.DOCKER_MYSQL_USER || 'root', // 用户名
+    password: process.env.DOCKER_MYSQL_PASSWORD || '', // 密码
+    database: process.env.DOCKER_MYSQL_DATABASE || '', // 数据库
+    host: process.env.DOCKER_MYSQL_HOST || '127.0.0.1', // host
+    port: process.env.DOCKER_MYSQL_PORT || 3306, // 端口
     connectionLimit: 1, // 连接池的连接个数，默认为 1
-    prefix: '', // 数据表前缀，如果一个数据库里有多个项目，那项目之间的数据表可以通过前缀来区分
+    prefix: process.env.DOCKER_MYSQL_PREFIX || '', // 数据表前缀，如果一个数据库里有多个项目，那项目之间的数据表可以通过前缀来区分
     acquireWaitTimeout: 0 // 等待连接的超时时间，避免获取不到连接一直卡在那里，开发环境下有用
   }
 };

@@ -150,5 +150,24 @@ yarn install
 yarn start
 ```
 
+### Docker 运行
+
+```bash
+# 构建
+docker build --no-cache -t demo/web-oauth-app:latest .
+
+# 运行
+docker run \
+    -p 8080:8080 \
+    -d \
+    --name web-oauth-app \
+    --env DOCKER_MYSQL_USER=root \
+    --env DOCKER_MYSQL_PASSWORD=123456 \
+    --env DOCKER_MYSQL_DATABASE=app \
+    --env DOCKER_MYSQL_HOST=locaclhost \
+    --env DOCKER_MYSQL_PORT=3306 \
+    demo/web-oauth-app:latest
+```
+
 ## License
 MIT
