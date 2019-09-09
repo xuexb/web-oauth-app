@@ -1,4 +1,4 @@
-# [第三方登录WEB网站示例](https://xuexb.com/web-oauth-app)
+# [第三方登录服务 Web OAuth 示例](https://xuexb.com/web-oauth-app)
 
 ## 声明
 
