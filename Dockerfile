@@ -1,6 +1,7 @@
 FROM node:10-alpine
 
 LABEL maintainer="xuexb <fe.xiaowu@gmail.com>"
+LABEL org.opencontainers.image.source https://github.com/xuexb/web-oauth-app
 
 ENV DOCKER true
 
