@@ -39,3 +39,4 @@ config.production.js
 adapter.production.js
 
 package-lock.json
+.DS_Store
