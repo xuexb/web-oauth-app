@@ -156,7 +156,7 @@ yarn start
 # 构建
 docker build --no-cache -t demo/web-oauth-app:latest .
 
-# 运行
+# 命令式运行
 docker run \
     -p 8080:8080 \
     -d \
@@ -166,6 +166,17 @@ docker run \
     --env MYSQL_DATABASE=app \
     --env MYSQL_HOST=locaclhost \
     --env MYSQL_PORT=3306 \
+    --env OAUTH_GITHUB_CLIENT_ID= \
+    --env OAUTH_... \
+    demo/web-oauth-app:latest
+
+# 配置文件式运行
+docker run \
+    -p 8080:8080 \
+    -d \
+    --name web-oauth-app \
+    -v "$(pwd)/config.js":/usr/src/app/src/config/config.js \
+    -v "$(pwd)/adapter.js":/usr/src/app/src/config/adapter.js \
     demo/web-oauth-app:latest
 ```
 

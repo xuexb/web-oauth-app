@@ -5,23 +5,23 @@ module.exports = Object.assign({}, {pkg}, {
   port: 8080,
   oauth: {
     github: {
-      client_id: '',
-      client_secret: ''
+      client_id: process.env.OAUTH_GITHUB_CLIENT_ID || '',
+      client_secret: process.env.OAUTH_GITHUB_CLIENT_SECRET || ''
     },
     qq: {
-      appid: 0,
-      appkey: '',
-      callback: ''
+      appid: process.env.OAUTH_QQ_APPID || 0,
+      appkey: process.env.OAUTH_QQ_APPKEY || '',
+      callback: process.env.OAUTH_QQ_CALLBACK || ''
     },
     weibo: {
-      appkey: 0,
-      appsecret: '',
-      callback: ''
+      appkey: process.env.OAUTH_WEIBO_APPKEY || 0,
+      appsecret: process.env.OAUTH_WEIBO_APPSECRET || '',
+      callback: process.env.OAUTH_WEIBO_CALLBACK || ''
     },
     baidu: {
-      appkey: '',
-      secretkey: '',
-      callback: ''
+      appkey: process.env.OAUTH_BAIDU_APPKEY || '',
+      secretkey: process.env.OAUTH_BAIDU_SECRETKEY || '',
+      callback: process.env.OAUTH_BAIDU_CALLBACK || ''
     }
   }
 });
