@@ -5,7 +5,8 @@
   "author": "xuexb <fe.xiaowu@gmail.com>",
   "prefix": "/web-oauth-app",
   "scripts": {
-    "start": "node development.js",
+    "start": "yarn dev",
+    "dev": "node development.js",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/"
   },
