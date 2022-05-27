@@ -1,8 +1,8 @@
-# [第三方登录服务 Web OAuth 示例](https://xuexb.com/web-oauth-app)
+# 第三方登录服务 Web OAuth 示例
 
 ## 声明
 
-该项目只是用户走通整个第三方的流程，并写出对应的思路，代码不提供参考价值，因为太渣！
+该项目只是用户走通整个第三方的流程，并写出对应的思路，代码不提供参考价值。
 
 ## 使用技术
 
@@ -10,7 +10,7 @@
 - 数据库基于 MySQL
 - 前端样式基于 [Bootstrap v4](https://v4.bootcss.com/)
 - 代码托管于 [GitHub@xuexb/web-oauth-app](https://github.com/xuexb/web-oauth-app)
-- 示例链接 <https://xuexb.com/web-oauth-app>
+- 示例链接 <https://web-oauth-app.xuexb.com>
 
 ## 数据库
 
