@@ -25,7 +25,6 @@ jobs:
         uses: docker/metadata-action@v2
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: type=semver,pattern={{version}}
 
       - name: Build Docker image
         uses: docker/build-push-action@v3
