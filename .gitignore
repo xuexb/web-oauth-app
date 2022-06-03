@@ -40,3 +40,4 @@ adapter.production.js
 
 package-lock.json
 .DS_Store
+.vscode/
