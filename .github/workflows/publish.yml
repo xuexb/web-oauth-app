@@ -11,10 +11,8 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -40,3 +38,11 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  depoly-prod:
+    needs: build-and-push-image
+    if: ${{ needs.build-and-push-image.result == 'success' }}
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.build-and-push-image.outputs.version }}
