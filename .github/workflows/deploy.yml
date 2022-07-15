@@ -104,6 +104,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           debug: true
+          command_timeout: 30m
           script: |
             docker pull ${{ env.REPOSITORY_TAG }} \
               && docker ps -q --filter "name=${{ env.CONTAINER_NAME }}" | xargs docker rm -f \
@@ -112,22 +113,22 @@ jobs:
                 --rm \
                 -d \
                 --name ${{ env.CONTAINER_NAME }} \
-                --env MYSQL_USER=${{ env.MYSQL_USER }} \
-                --env MYSQL_PASSWORD=${{ env.MYSQL_PASSWORD }} \
-                --env MYSQL_DATABASE=${{ env.MYSQL_DATABASE }} \
-                --env MYSQL_HOST=${{ env.MYSQL_HOST }} \
-                --env MYSQL_PORT=${{ env.MYSQL_PORT }} \
-                --env OAUTH_GITHUB_CLIENT_ID=${{ env.OAUTH_GITHUB_CLIENT_ID }} \
-                --env OAUTH_GITHUB_CLIENT_SECRET=${{ env.OAUTH_GITHUB_CLIENT_SECRET }} \
-                --env OAUTH_QQ_APPID=${{ env.OAUTH_QQ_APPID }} \
-                --env OAUTH_QQ_APPKEY=${{ env.OAUTH_QQ_APPKEY }} \
-                --env OAUTH_QQ_CALLBACK=${{ env.OAUTH_QQ_CALLBACK }} \
-                --env OAUTH_WEIBO_APPKEY=${{ env.OAUTH_WEIBO_APPKEY }} \
-                --env OAUTH_WEIBO_APPSECRET=${{ env.OAUTH_WEIBO_APPSECRET }} \
-                --env OAUTH_WEIBO_CALLBACK=${{ env.OAUTH_WEIBO_CALLBACK }} \
-                --env OAUTH_BAIDU_APPKEY=${{ env.OAUTH_BAIDU_APPKEY }} \
-                --env OAUTH_BAIDU_SECRETKEY=${{ env.OAUTH_BAIDU_SECRETKEY }} \
-                --env OAUTH_BAIDU_CALLBACK=${{ env.OAUTH_BAIDU_CALLBACK }} \
+                --env MYSQL_USER=${{ secrets.MYSQL_USER }} \
+                --env MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
+                --env MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} \
+                --env MYSQL_HOST=${{ secrets.MYSQL_HOST }} \
+                --env MYSQL_PORT=${{ secrets.MYSQL_PORT }} \
+                --env OAUTH_GITHUB_CLIENT_ID=${{ secrets.OAUTH_GITHUB_CLIENT_ID }} \
+                --env OAUTH_GITHUB_CLIENT_SECRET=${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }} \
+                --env OAUTH_QQ_APPID=${{ secrets.OAUTH_QQ_APPID }} \
+                --env OAUTH_QQ_APPKEY=${{ secrets.OAUTH_QQ_APPKEY }} \
+                --env OAUTH_QQ_CALLBACK=${{ secrets.OAUTH_QQ_CALLBACK }} \
+                --env OAUTH_WEIBO_APPKEY=${{ secrets.OAUTH_WEIBO_APPKEY }} \
+                --env OAUTH_WEIBO_APPSECRET=${{ secrets.OAUTH_WEIBO_APPSECRET }} \
+                --env OAUTH_WEIBO_CALLBACK=${{ secrets.OAUTH_WEIBO_CALLBACK }} \
+                --env OAUTH_BAIDU_APPKEY=${{ secrets.OAUTH_BAIDU_APPKEY }} \
+                --env OAUTH_BAIDU_SECRETKEY=${{ secrets.OAUTH_BAIDU_SECRETKEY }} \
+                --env OAUTH_BAIDU_CALLBACK=${{ secrets.OAUTH_BAIDU_CALLBACK }} \
                 ${{ env.REPOSITORY_TAG }}
 
   test:
