@@ -6,13 +6,12 @@ on:
       - v**
 env:
   REGISTRY: ghcr.io
+  DOMAIN: web-oauth-app.xuexb.com
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.meta.outputs.version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,8 +20,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_ACCESS_TOKEN }}
+          username: ${{ secrets.PERSONAL_ACCESS_RW_NAME }}
+          password: ${{ secrets.PERSONAL_ACCESS_RW_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -38,11 +37,31 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-  depoly-prod:
-    needs: build-and-push-image
-    if: ${{ needs.build-and-push-image.result == 'success' }}
-    uses: ./.github/workflows/deploy.yml
-    secrets: inherit
-    with:
-      version: ${{ needs.build-and-push-image.outputs.version }}
+      - name: deploy
+        uses: xuexb/dyups-actions/deploy@master
+        with:
+          ssh-host: ${{ secrets.SSH_HOST }}
+          ssh-username: ${{ secrets.SSH_USERNAME }}
+          ssh-key: ${{ secrets.SSH_KEY }}
+          ssh-port: ${{ secrets.SSH_PORT }}
+          image: ${{ secrets.GHCR_MIRROR }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          dyups-server: ${{ secrets.DYUPS_SERVER }}
+          dyups-token: ${{ secrets.DYUPS_TOKEN }}
+          domain: ${{ env.DOMAIN }}
+          env-list: |
+            MYSQL_USER=${{ secrets.MYSQL_USER }}
+            MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+            MYSQL_HOST=${{ secrets.MYSQL_HOST }}
+            MYSQL_PORT=${{ secrets.MYSQL_PORT }}
+            OAUTH_GITHUB_CLIENT_ID=${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
+            OAUTH_GITHUB_CLIENT_SECRET=${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
+            OAUTH_QQ_APPID=${{ secrets.OAUTH_QQ_APPID }}
+            OAUTH_QQ_APPKEY=${{ secrets.OAUTH_QQ_APPKEY }}
+            OAUTH_QQ_CALLBACK=${{ secrets.OAUTH_QQ_CALLBACK }}
+            OAUTH_WEIBO_APPKEY=${{ secrets.OAUTH_WEIBO_APPKEY }}
+            OAUTH_WEIBO_APPSECRET=${{ secrets.OAUTH_WEIBO_APPSECRET }}
+            OAUTH_WEIBO_CALLBACK=${{ secrets.OAUTH_WEIBO_CALLBACK }}
+            OAUTH_BAIDU_APPKEY=${{ secrets.OAUTH_BAIDU_APPKEY }}
+            OAUTH_BAIDU_SECRETKEY=${{ secrets.OAUTH_BAIDU_SECRETKEY }}
+            OAUTH_BAIDU_CALLBACK=${{ secrets.OAUTH_BAIDU_CALLBACK }}
