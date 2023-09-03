@@ -44,7 +44,7 @@ jobs:
           ssh-username: ${{ secrets.SSH_USERNAME }}
           ssh-key: ${{ secrets.SSH_KEY }}
           ssh-port: ${{ secrets.SSH_PORT }}
-          image: ${{ secrets.GHCR_MIRROR }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
           dyups-server: ${{ secrets.DYUPS_SERVER }}
           dyups-token: ${{ secrets.DYUPS_TOKEN }}
           domain: ${{ env.DOMAIN }}
